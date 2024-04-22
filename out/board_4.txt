@@ -1,0 +1,11 @@
+Board Name: Development
+Board Description: This board is used for tracking development tasks.
+Board Status: CLOSED
+
+Tasks:
+- Title: Develop API
+  Description: Develop an API endpoint for adding tasks.
+  Status: OPEN
+- Title: Develop
+  Description: Develop an API endpoint for adding tasks.
+  Status: COMPLETED
