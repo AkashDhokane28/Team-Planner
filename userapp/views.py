@@ -68,14 +68,32 @@ class UpdateUserAPIView(APIView):
 
         return Response({"message": "User updated successfully","update_user_data":user_data}, status=status.HTTP_200_OK)
 
-class GetUserTeamsView(APIView):
-    def get(self, request, user_id, *args, **kwargs):
+class GetUserTeamsAPIView(APIView):
+    def post(self, request):
+        # Parse incoming JSON data
+        data = request.data
         try:
-            user = User.objects.get(id=user_id)
-            teams = user.team_set.all().values('name', 'description', 'creation_time')
-            return Response(list(teams))
+            user_id = data['id']
+            user = User.objects.get(pk=user_id)
+            teams = user.team_set.all()
+            # Construct the list of team data
+            team_list = [
+                {
+                    "name": team.team_name,
+                    "description": team.team_description,
+                    "creation_time": team.created_timestamp.strftime("%Y-%m-%d %H:%M:%S")
+                }
+                for team in teams
+            ]
+
+            return Response(team_list, status=status.HTTP_200_OK)
+
         except User.DoesNotExist:
-            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+        except KeyError:
+            return Response({"error": "Missing user ID in request."}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"error": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 

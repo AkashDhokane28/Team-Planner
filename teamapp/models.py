@@ -1,6 +1,4 @@
 from django.db import models
-
-# Create your models here.
 from userapp.models import *
 
 class Team(models.Model):

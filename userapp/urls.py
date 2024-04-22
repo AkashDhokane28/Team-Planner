@@ -22,6 +22,6 @@ urlpatterns = [
     path('list/', ListUsersView.as_view(), name='list-users'),
     path('describe/', DescribeUserView.as_view(), name='describe-user'),
     path('update/', UpdateUserAPIView.as_view(), name='update-user'),
-    path('teams/', GetUserTeamsView.as_view(), name='get-user-teams'),
+    path('user_teams/', GetUserTeamsAPIView.as_view(), name='get-user-teams'),
 ]
 
