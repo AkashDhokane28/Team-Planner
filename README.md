@@ -1,3 +1,6 @@
+
+note : "I am using mysqlclient, so you need to create a database and then add the database name in settings.py under the database configuration."
+
 "# Team-Planner" 
 Team Project Planner Tool
 Overview
